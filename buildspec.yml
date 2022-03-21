@@ -1,0 +1,16 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - npm install
+  build:
+    commands:
+      - aws codeartifact login \
+          --tool npm \
+          --domain $ARTIFACTS_DOMAIN \
+          --domain-owner $ARTIFACTS_ACCOUNT_ID \
+          --repository $ARTIFACTS_REPOSITORY
+      - npm run lint
+      - npm run test
+      - npm run build
+      - npx semantic-release

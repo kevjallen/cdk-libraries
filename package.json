@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "lint": "eslint ./**/*.ts",
+    "lint": "eslint ./{lib,test}/**/*.ts",
     "test": "jest"
   },
   "devDependencies": {
