@@ -1,15 +1,21 @@
 version: 0.2
+env:
+  shell: bash
 phases:
   install:
     commands:
-      - npm install
+      - . "$ASDF_SCRIPT" && asdf install
+  pre_build:
+    commands:
+      - |
+        aws codeartifact login \
+          --domain "$ARTIFACTS_DOMAIN" \
+          --domain-owner "$ARTIFACTS_ACCOUNT_ID" \
+          --repository "$ARTIFACTS_REPOSITORY" \
+          --tool npm
   build:
     commands:
-      - aws codeartifact login \
-          --tool npm \
-          --domain $ARTIFACTS_DOMAIN \
-          --domain-owner $ARTIFACTS_ACCOUNT_ID \
-          --repository $ARTIFACTS_REPOSITORY
+      - npm install
       - npm run lint
       - npm run test
       - npm run build
