@@ -30,6 +30,7 @@
     "cdk.out"
   ],
   "include": [
-    "package.json"
+    "package.json",
+    "lib/**/*.ts"
   ]
 }
